@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 using namespace  std;
 
 class BubbleSort{
@@ -9,9 +9,19 @@ class BubbleSort{
 };
 
 void BubbleSort::classic(){
-    int var;
-    asm("mov rax, %[var];"
+    int qts = 0;
+    cout << "Size vector: ";
+    cin >> qts;
+    std::vector<double> vet;
+    vet.reserve(qts);
+
+    double aux = 0;
+    for(int i = 0; i < qts; i++){
+        cin >> aux;
+        vet.push_back(aux);
+    }
+    asm("mov rax, %[vet];"
         :
-        :[var] "m" (var)
+        :[vet] "m" (vet)
         :"cc");
 }
