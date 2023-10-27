@@ -1,4 +1,4 @@
-//g++ body.cpp -o exec.x -masm=intel -lmysqlcppconn
+//g++ body.cpp -o exec.x -masm=intel
 #include <stdio.h>
 #include <iostream>
 #include "bubbleSort.hpp"
