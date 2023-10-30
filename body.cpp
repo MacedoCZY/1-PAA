@@ -5,5 +5,6 @@
 
 int main(){
     BubbleSort bs;
-    bs.classic();
+    //bs.classic();
+    bs.flag();
 }
