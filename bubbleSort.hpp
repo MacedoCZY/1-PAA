@@ -3,6 +3,8 @@
 #include <vector>
 #include <iomanip>
 #include <stdio.h>
+#include <cmath>
+#include <omp.h>
 using namespace  std;
 
 class BubbleSort{
@@ -26,9 +28,8 @@ void BubbleSort::classic(){
         vet.push_back(aux);
     }
     
-
     for(double i = 0, k = 0 ; i < qts; i++){       
-        if (k == 5) {
+        if (k == 2) {
             //cout << setprecision(4) << vet.at(i) << "\t\t" << endl;
             printf("%.4lf\t\t\n", vet.at(i)); 
             k = 0;
@@ -38,13 +39,11 @@ void BubbleSort::classic(){
             k++;
         }
     }
-
-    double teste = 0;
-
+    
     asm("lea rax, %[vet];"
         "xor r10, r10;"
         "for1:;"
-            
+        
             "xor r11, r11;"
             "xor r12, r12;"
             "mov rbx, rax;"
@@ -55,6 +54,7 @@ void BubbleSort::classic(){
                 "inc r12;"
                 "movsd xmm2, [rbx+r12*8];"
                 "movsd xmm3, xmm1;"
+                
                 "comisd xmm1, xmm2;"
             
                     "jb continue;"
@@ -62,8 +62,8 @@ void BubbleSort::classic(){
                     "movsd [rbx+r11*8], xmm2;"
                     "movsd [rbx+r12*8], xmm3;"
                 
-                    "continue:;"
-            
+                    "continue:;"        
+    
             "inc r11;"
             "mov r12d, %[qts];"
             "dec r12;"
@@ -74,12 +74,12 @@ void BubbleSort::classic(){
         "cmp r10d, %[qts];"
         "jl for1;"
         :
-        :[vet] "m" (vet.at(0)), [teste] "m"(teste), [qts] "m" (qts)
+        :[qts] "m" (qts), [vet] "m" (vet.at(0))
         :"cc");
 
-   cout << endl << endl << endl;
+    cout << endl << endl << endl;
 
-   for(double i = 0, k = 0 ; i < vet.size(); i++){       
+    for(double i = 0, k = 0 ; i < vet.size(); i++){       
         if (k == 2) {
             //cout << setprecision(4) << vet.at(i) << "\t\t" << endl;
             printf("%.4lf\t\t\n", vet.at(i)); 
@@ -158,7 +158,7 @@ void BubbleSort::flag(){
         "jl for11;"
         "finish:;"
         :
-        :[vet] "m" (vet.at(0)), [teste] "m"(teste), [qts] "m" (qts)
+        :[vet] "m" (vet.at(0)), [qts] "m" (qts)
         :"cc");
 
    cout << endl << endl << endl;
