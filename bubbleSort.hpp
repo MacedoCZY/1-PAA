@@ -75,8 +75,7 @@ void BubbleSort::classic(){
                 
                 "comisd xmm1, xmm2;"
             
-                    "jb continue;"
-                    "flag:;"
+                    "jbe continue;"
                     "movsd [rbx+r11*8], xmm2;"
                     "movsd [rbx+r12*8], xmm3;"
                 
@@ -148,7 +147,7 @@ void BubbleSort::flag(){
         "xor r10, r10;"
         "for11:;"
             
-            "xor r15, 15;"
+            "xor r15, r15;"
             "xor r11, r11;"
             "xor r12, r12;"
             "mov rbx, rax;"
@@ -161,7 +160,7 @@ void BubbleSort::flag(){
                 "movsd xmm3, xmm1;"
                 "comisd xmm1, xmm2;"
             
-                    "jb continue1;"
+                    "jbe continue1;"
                     "inc r15;"
                     "movsd [rbx+r11*8], xmm2;"
                     "movsd [rbx+r12*8], xmm3;"
