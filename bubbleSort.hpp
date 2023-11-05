@@ -42,8 +42,6 @@ void BubbleSort::classic(){
 		vet.push_back(aux);
 	}
     
-	
-	cout << qts << " " << vet.size() << endl;
 	if(prt == true){
 		for(double i = 0, k = 0 ; i < vet.size(); i++){       
 			if (k == 2) {
