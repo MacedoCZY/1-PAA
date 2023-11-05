@@ -4,42 +4,61 @@
 #include <iomanip>
 #include <stdio.h>
 #include <cmath>
-#include <omp.h>
+#include <limits.h>
+#include <chrono>
+
 using namespace  std;
 
 class BubbleSort{
-    
     public:
+		int qts;
+		FILE *archive;
+		bool prt = false;
+		
+    public:
+		BubbleSort(int size, FILE *arch){
+			qts = size;
+			archive = arch;
+		}
+		void setArch(FILE *arch){
+			archive = arch;
+		}
+		void setPrint(bool print){
+			prt = print;
+		}
         void classic();
         void flag();
 };
 
 void BubbleSort::classic(){
-    int qts = 0;
-    cout << "Size vector: ";
-    cin >> qts;
     std::vector<double> vet;
     vet.reserve(qts);
-
-    double aux = 0;
-    for(int i = 0; i < qts; i++){
-        //cin >> aux;
-        aux = random() % 100 + 1;
-        vet.push_back(aux);
-    }
+	
+	double aux = 0;
+	while(!feof(archive)){
+		fscanf(archive, "%le", &aux);
+		//cout << aux << endl;
+		vet.push_back(aux);
+	}
     
-    for(double i = 0, k = 0 ; i < qts; i++){       
-        if (k == 2) {
-            //cout << setprecision(4) << vet.at(i) << "\t\t" << endl;
-            printf("%.4lf\t\t\n", vet.at(i)); 
-            k = 0;
-        }else{
-            //cout << setprecision(4) << vet.at(i) << "\t\t";
-            printf("%.4lf\t\t", vet.at(i)); 
-            k++;
-        }
+	
+	cout << qts << " " << vet.size() << endl;
+	if(prt == true){
+		for(double i = 0, k = 0 ; i < vet.size(); i++){       
+			if (k == 2) {
+				//cout << setprecision(4) << vet.at(i) << "\t\t" << endl;
+				printf("%.4lf\t\t\n", vet.at(i)); 
+				k = 0;
+			}else{
+				//cout << setprecision(4) << vet.at(i) << "\t\t";
+				printf("%.4lf\t\t", vet.at(i)); 
+				k++;
+			}
+		}
+		cout << endl << endl;
     }
-    
+	
+	auto inicio = std::chrono::high_resolution_clock::now();
     asm("lea rax, %[vet];"
         "xor r10, r10;"
         "for1:;"
@@ -76,51 +95,56 @@ void BubbleSort::classic(){
         :
         :[qts] "m" (qts), [vet] "m" (vet.at(0))
         :"cc");
-
-    cout << endl << endl << endl;
-
-    for(double i = 0, k = 0 ; i < vet.size(); i++){       
-        if (k == 2) {
-            //cout << setprecision(4) << vet.at(i) << "\t\t" << endl;
-            printf("%.4lf\t\t\n", vet.at(i)); 
-            k = 0;
-        }else{
-            //cout << setprecision(4) << vet.at(i) << "\t\t";
-            printf("%.4lf\t\t", vet.at(i)); 
-            k++;
-        }
-    }
+	auto resultado = std::chrono::high_resolution_clock::now() - inicio;
+    
+	if(prt == true){
+		for(double i = 0, k = 0 ; i < vet.size(); i++){       
+			if (k == 2) {
+				//cout << setprecision(4) << vet.at(i) << "\t\t" << endl;
+				printf("%.4lf\t\t\n", vet.at(i)); 
+				k = 0;
+			}else{
+				//cout << setprecision(4) << vet.at(i) << "\t\t";
+				printf("%.4lf\t\t", vet.at(i)); 
+				k++;
+			}
+		}
+		cout << endl << endl;
+	}
+	
+	long long seconds = std::chrono::duration_cast<std::chrono::seconds>(resultado).count();
+	cout << seconds << " sec" << endl;
+	
+	vet.erase(vet.begin(), vet.end());
+	vet.shrink_to_fit();
 }
 
 void BubbleSort::flag(){
-    int qts = 0;
-    cout << "Size vector: ";
-    cin >> qts;
     std::vector<double> vet;
     vet.reserve(qts);
-
-    double aux = 0;
-    for(int i = 0; i < qts; i++){
-        //cin >> aux;
-        aux = random() % 100 + 1;
-        vet.push_back(aux);
-    }
+	
+	int aux = 0;
+	while(!feof(archive)){
+		fscanf(archive, "%d", &aux);
+		 vet.push_back(aux);
+	}
     
-
-    for(double i = 0, k = 0 ; i < qts; i++){       
-        if (k == 2) {
-            //cout << setprecision(4) << vet.at(i) << "\t\t" << endl;
-            printf("%.4lf\t\t\n", vet.at(i)); 
-            k = 0;
-        }else{
-            //cout << setprecision(4) << vet.at(i) << "\t\t";
-            printf("%.4lf\t\t", vet.at(i)); 
-            k++;
-        }
-    }
-
-    double teste = 0;
-
+	if(prt == true){
+		for(double i = 0, k = 0 ; i < vet.size(); i++){       
+			if (k == 2) {
+				//cout << setprecision(4) << vet.at(i) << "\t\t" << endl;
+				printf("%.4lf\t\t\n", vet.at(i)); 
+				k = 0;
+			}else{
+				//cout << setprecision(4) << vet.at(i) << "\t\t";
+				printf("%.4lf\t\t", vet.at(i)); 
+				k++;
+			}
+		}
+		cout << endl << endl;
+	}
+	
+	auto inicio = std::chrono::high_resolution_clock::now();
     asm("lea rax, %[vet];"
         "xor r10, r10;"
         "for11:;"
@@ -160,19 +184,27 @@ void BubbleSort::flag(){
         :
         :[vet] "m" (vet.at(0)), [qts] "m" (qts)
         :"cc");
+		
+	auto resultado = std::chrono::high_resolution_clock::now() - inicio;
+	
+	if(prt == true){
+		for(double i = 0, k = 0 ; i < vet.size(); i++){       
+			if (k == 2) {
+				//cout << setprecision(4) << vet.at(i) << "\t\t" << endl;
+				printf("%.4lf\t\t\n", vet.at(i)); 
+				k = 0;
+			}else{
+				//cout << setprecision(4) << vet.at(i) << "\t\t";
+				printf("%.4lf\t\t", vet.at(i)); 
+				k++;
+			}    
+	   }
+	   cout << endl << endl;
+	}
+	
+	long long seconds = std::chrono::duration_cast<std::chrono::seconds>(resultado).count();
+	cout << seconds <<  " sec" << endl << endl;
 
-   cout << endl << endl << endl;
-
-   for(double i = 0, k = 0 ; i < vet.size(); i++){       
-        if (k == 5) {
-            //cout << setprecision(4) << vet.at(i) << "\t\t" << endl;
-            printf("%.4lf\t\t\n", vet.at(i)); 
-            k = 0;
-        }else{
-            //cout << setprecision(4) << vet.at(i) << "\t\t";
-            printf("%.4lf\t\t", vet.at(i)); 
-            k++;
-        }    
-   } 
+	vet.erase(vet.begin(), vet.end());
+	vet.shrink_to_fit();
 }
-
