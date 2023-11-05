@@ -42,7 +42,7 @@ int main(int argc, char* argv[]){
 				getline(cin, name);
 				arch = fopen(name.c_str(), "r");
 				if(arch != NULL){
-					bs.setArch(arch);
+					bs.setArch(arch, archSize(arch));
 					cout << "Archive changed" << endl;
 				}else{
 					arch = fopen(argv[1], "r");

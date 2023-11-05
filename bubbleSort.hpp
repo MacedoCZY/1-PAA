@@ -20,7 +20,8 @@ class BubbleSort{
 			qts = size;
 			archive = arch;
 		}
-		void setArch(FILE *arch){
+		void setArch(FILE *arch, int size){
+			qts = size;
 			archive = arch;
 		}
 		void setPrint(bool print){
@@ -87,11 +88,11 @@ void BubbleSort::classic(){
             "mov r12d, %[qts];"
             "dec r12;"
             "cmp r11d, r12d;"
-            "jl for2;"
+            "jle for2;"
 
         "inc r10;"
         "cmp r10d, %[qts];"
-        "jl for1;"
+        "jle for1;"
         :
         :[qts] "m" (qts), [vet] "m" (vet.at(0))
         :"cc");
@@ -173,13 +174,13 @@ void BubbleSort::flag(){
             "mov r12d, %[qts];"
             "dec r12;"
             "cmp r11d, r12d;"
-            "jl for22;"
+            "jle for22;"
         
         "cmp r15, 0x0;"
         "je finish;"
         "inc r10;"
         "cmp r10d, %[qts];"
-        "jl for11;"
+        "jle for11;"
         "finish:;"
         :
         :[vet] "m" (vet.at(0)), [qts] "m" (qts)
