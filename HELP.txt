@@ -1,0 +1,13 @@
+
+
+Para compilar o código é necessário utiliza o comando:
+    -- g++ body.cpp -o exec.x -masm=intel
+
+Ao executar o usuário precisa informar qual arquivo será utilizado:
+    -- ./exec.x <nome-do-arquivo>
+
+No programa será exibido um menu com quatro opções:
+    -- 1 Bubblesort convencional
+    -- 2 Bubblesort com flag
+    -- 3 Mudar arquivo
+    -- 4 Fecha o programa
