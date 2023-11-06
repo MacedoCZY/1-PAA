@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 plt.figure(figsize=(10,7.5))
 
@@ -17,25 +17,27 @@ y_data_decrescentes_flag = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 7, 12, 52, 325, 733
 y_data_parcialmente_ordenados_flag = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 5, 8, 12, 16, 16, 18]
 
 # Crie um gráfico de linhas com quatro linhas
-#plt.plot(x_data, y_data_aleatorio, label="Aleatório")
-#plt.plot(x_data, y_data_ordenados, label="Ordenados")
+plt.plot(x_data, y_data_aleatorio, label="Aleatório")
+plt.plot(x_data, y_data_ordenados, label="Ordenados")
 plt.plot(x_data, y_data_decrescentes, label="Decrescentes")
-#plt.plot(x_data, y_data_parcialmente_ordenados, label="Parcialmente ordenados")
-#plt.plot(x_data, y_data_aleatorio_flag, label="Aleatório com Flag")
-#plt.plot(x_data, y_data_ordenados_flag, label="Ordenados com Flag")
+plt.plot(x_data, y_data_parcialmente_ordenados, label="Parcialmente ordenados")
+plt.plot(x_data, y_data_aleatorio_flag, label="Aleatório com Flag")
+plt.plot(x_data, y_data_ordenados_flag, label="Ordenados com Flag")
 plt.plot(x_data, y_data_decrescentes_flag, label="Decrescentes com Flag")
-#plt.plot(x_data, y_data_parcialmente_ordenados_flag, label="Parcialmente ordenados com Flag")
-plt.xticks(x_data, rotation=90)
+plt.plot(x_data, y_data_parcialmente_ordenados_flag, label="Parcialmente ordenados com Flag")
+plt.xticks([ 10000,100000, 250000, 500000, 1000000, 1500000, 2000000], rotation=70)
+plt.yticks(np.arange(y_data_aleatorio[0], y_data_aleatorio[-1], step=500))
+plt.ticklabel_format(style='plain')
 plt.tight_layout()
 
 # Configure o label do eixo x
-plt.xlabel("Tamanho do vetor Ordenado(Potência de 10^6)")
+plt.xlabel("Tamanho do vetor Ordenado")
 
 # Configure o label do eixo y
 plt.ylabel("Tempo de execução em Segundos")
 
 plt.xlim(x_data[0], x_data[-1])
-plt.subplots_adjust(left=0.08, right=0.992, top=0.992, bottom=0.1)
+plt.subplots_adjust(left=0.08, right=0.988, top=0.992, bottom=0.13)
 # Configure as cores das linhas
 #plt.legend(loc="upper left", colors=["red", "green", "blue", "yellow"])
 
