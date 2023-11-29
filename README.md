@@ -1,12 +1,10 @@
-# 1-PAA
+# Projeto e Análise de Algoritmos
 
-Projeto e Análise de Algoritmos, bubble sort em c++, com processamento em NASM 
+## Descrição
+Bubble sort em c++, com processamento em NASM.\\
+Duas funções no arquivo .hpp, classic() - implementação do método clássico BubbleSort\\
+Flag() - implementação do BubbleSort com flag de controle para parada.
 
-Tipo do gráfico bubblesort VS algo -> nomes descritivos -> colocar o nome como figura(n) 
-
-Nome dos eixos deve ser explicito/descritivo -> 
-      tamanho do vetor/conjunto de entrada
-      tempo consumido
-
-      Bubble timer em segundos
-      
+## Documento
+No documento relatório.pdf, podemos observar todos os resultados perante os testes\\
+sobre os conjuntos de dados >> Descrescente, Ordenados, Parcialmente Ordenados, Aleatório.\\
