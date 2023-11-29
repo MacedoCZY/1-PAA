@@ -7,4 +7,4 @@ Flag() - implementação do BubbleSort com flag de controle para parada.
 
 ## Documento
 No documento relatório.pdf, podemos observar todos os resultados perante os testes\
-sobre os conjuntos de dados >> Descrescente, Ordenados, Parcialmente Ordenados, Aleatório.
+sobre os conjuntos de dados >> Descrescente, Ordenados, Parcialmente Ordenados e Aleatório.
